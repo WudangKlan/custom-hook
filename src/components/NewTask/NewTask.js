@@ -10,16 +10,25 @@ const NewTask = (props) => {
 
   const { isLoading, error, sendRequest } = useHttp();
 
+  const addingData = (taskText,newObj) => {
+      
+    const generatedId = newObj.name; // firebase-specific => "name" contains generated id
+    const createdTask = { id: generatedId, text: taskText };
+    
+    props.onAddTask(createdTask);
+  };
+
+
   const enterTaskHandler = async (taskText) => {
   
 
-    const addingData = (newObj) => {
+    // const addingData = (newObj) => {
       
-      const generatedId = newObj.name; // firebase-specific => "name" contains generated id
-      const createdTask = { id: generatedId, text: taskText };
+    //   const generatedId = newObj.name; // firebase-specific => "name" contains generated id
+    //   const createdTask = { id: generatedId, text: taskText };
       
-      props.onAddTask(createdTask);
-    };
+    //   props.onAddTask(createdTask);
+    // };
 
     // const {isLoading,error}=useHttp({
     //   url: "https://react-http-5e8f1-default-rtdb.asia-southeast1.firebasedatabase.app/tasks.json",
@@ -42,7 +51,8 @@ const NewTask = (props) => {
         },
         body: {text:taskText},
       },
-      addingData
+      //addingData
+      addingData.bind(null,taskText)
     );
 
     // try {
