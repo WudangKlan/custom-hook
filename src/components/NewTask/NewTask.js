@@ -11,7 +11,7 @@ const NewTask = (props) => {
   const { isLoading, error, sendRequest } = useHttp();
 
   const addingData = (taskText,newObj) => {
-      
+    console.log(taskText,newObj) 
     const generatedId = newObj.name; // firebase-specific => "name" contains generated id
     const createdTask = { id: generatedId, text: taskText };
     
@@ -52,7 +52,11 @@ const NewTask = (props) => {
         body: {text:taskText},
       },
       //addingData
-      addingData.bind(null,taskText)
+      //addingData.bind(null,taskText)  // cara 1 dengan binding - indirect excecution
+      //cara ke2 dengan function (data) tarikan dari use-http (callback function => applyData(data))
+      (data)=>{
+        addingData(taskText,data)
+      }
     );
 
     // try {

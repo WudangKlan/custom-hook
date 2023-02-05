@@ -22,7 +22,7 @@ const useHttp = ()=>{
           }
     
           const data = await response.json();
-          
+          //console.log(data)
           applyData(data)
          
         } catch (err) {
@@ -34,7 +34,8 @@ const useHttp = ()=>{
       return {
         isLoading,
         error,
-        sendRequest
+        sendRequest,
+        
       }
 
 }
